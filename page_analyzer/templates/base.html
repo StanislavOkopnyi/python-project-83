@@ -12,15 +12,19 @@
   <body>
     <header class="text-bg-secondary py-3">
       <nav class="nav nav-pills">
-        <a class="navbar-brand nav-link text-sm-center fs-3" href="{{url_for('index')}}">Анализатор страниц</a>
-        <a class="text-white-50 nav-link text-sm-center fs-5" href="">Сайты</a>
+        <a class="navbar-brand nav-link text-sm-center fs-4" href="{{url_for('index')}}">Анализатор страниц</a>
+        <a class="text-white-50 nav-link text-sm-center fs-6" href="">Сайты</a>
       </nav>
     </header>
     {% block body %}
     {% endblock %}
 
     <footer class="position-absolute bottom-0 start-50 translate-middle">
-      <p class="text-center">GitHub: <a href="">Stanislav Okopnyi</a></p>
+      <p class="text-center">GitHub <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.c0iIyE2V0os2corDMYbKswHaHg%26pid%3DApi&f=1&ipt=e6d2683cb006bee383c04caa02be9d49a01722bf4250822ecf3fff3dc8efa676&ipo=images" width=20px height=20px alt="GitHub">: <a href="https://github.com/StanislavOkopnyi">Stanislav Okopnyi</a></p>
     </footer>
+    <style>
+      {% block style %}
+      {% endblock %}
+    </style>
   </body>
 </html>
