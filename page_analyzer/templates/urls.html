@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="table-div">
+<h2 class="py-4">Сайты</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Последняя проверка</th>
+      <th>Код ответа</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for site in sites %}
+      <tr>
+        <td>{{site.id}}</td>
+        <td>{{site.name}}</td>
+        <td>{{site.last_check}}</td>
+        <td>{{site.response_code}}</td>
+      </tr> 
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
+
+
+{% block style %}
+  .table-div {
+  padding: 1em;
+  };
+{% endblock %}
+
