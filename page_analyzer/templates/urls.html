@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="table-div">
+<div class="table-div pt-3 p-5">
 <h2 class="py-4">Сайты</h2>
-<table class="table table-bordered">
+<table class="table table-bordered" data-test="url">
   <thead>
     <tr>
       <th>ID</th>
@@ -16,20 +16,12 @@
     {% for site in sites %}
       <tr>
         <td>{{site.id}}</td>
-        <td>{{site.name}}</td>
-        <td>{{site.last_check}}</td>
-        <td>{{site.response_code}}</td>
+        <td><a href="{{url_for('get_url', id=site.id)}}">{{site.name}}</a></td>
+        <td></td>
+        <td></td>
       </tr> 
     {% endfor %}
   </tbody>
 </table>
 </div>
 {% endblock %}
-
-
-{% block style %}
-  .table-div {
-  padding: 1em;
-  };
-{% endblock %}
-
