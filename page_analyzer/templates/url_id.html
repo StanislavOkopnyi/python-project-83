@@ -22,8 +22,8 @@
   </div>
   <div class="table-div pt-3 p-5">
     <h2 class="py-2">Проверки</h2>
-    <form>
-      <input type="button" class="btn btn-primary" name="check-button" value="Запустить проверку">
+    <form method="POST" action="{{ url_for('url_check', id=site.id) }}">
+      <input type="submit" class="btn btn-primary" name="check-button" value="Запустить проверку">
     </form>
     <table class="table table-bordered table-hover mt-2" data-test="checks">
       <thead>

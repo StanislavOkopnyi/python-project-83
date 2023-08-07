@@ -17,8 +17,8 @@
       <tr>
         <td>{{site.id}}</td>
         <td><a href="{{url_for('get_url', id=site.id)}}">{{site.name}}</a></td>
-        <td></td>
-        <td></td>
+        <td>{{site.created_at}}</td>
+        <td>{{site.status_code}}</td>
       </tr> 
     {% endfor %}
   </tbody>

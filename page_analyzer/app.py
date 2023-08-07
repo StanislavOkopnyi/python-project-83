@@ -53,13 +53,14 @@ def index_post():
         flash("Данный URL был сохранен ранее", "fail")
         return redirect(url_for('index_get'))
 
+    id = database.get_id_from_url(data["url"])
     flash("URL сохранен =)", "success")
-    return redirect(url_for('index_get'))
+    return redirect(url_for('get_url', id=id))
 
 
 @app.route("/urls/")
 def urls_list():
-    sites = database.get_all_urls()[::-1]
+    sites = database.get_urls_with_checks()[::-1]
     messages = get_flashed_messages(with_categories=True)
     return render_template(
         "urls.html",
@@ -71,7 +72,17 @@ def urls_list():
 @app.route("/urls/<id>")
 def get_url(id):
     site = database.get_url(id)
+    checks = database.get_checks_for_site(id)
+    messages = get_flashed_messages(with_categories=True)
     return render_template(
         "url_id.html",
         site=site,
+        checks=checks,
+        messages=messages
     )
+
+
+@app.route("/urls/<id>/checks", methods=["POST"])
+def url_check(id):
+    database.create_new_check(id)
+    return redirect(url_for('get_url', id=id))
