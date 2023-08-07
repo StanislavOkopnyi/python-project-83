@@ -38,7 +38,7 @@ class URLsInterface(DataBaseConnection):
                 for name in args:
                     cur.execute(STATEMENT, (name,))
 
-    def get_url(self, id) -> tuple | None:
+    def get_url(self, id) -> NamedTuple:
         """
         Return one url from db
         Requires url's id
@@ -59,18 +59,18 @@ class URLsInterface(DataBaseConnection):
         return url.id
 
 
-
 class URLChecksInterface(DataBaseConnection):
 
-    def create_new_check(self, url_id: int) -> None:
-        STATEMENT = "INSERT INTO url_checks (url_id) VALUES (%s)"
+    def create_new_check(self, url_id: int, status_code: int) -> None:
+        STATEMENT = ("INSERT INTO url_checks (url_id, status_code) "
+                     "VALUES (%s, %s)")
 
         with self.conn as conn:
             with conn.cursor() as cur:
-                cur.execute(STATEMENT, (url_id, ))
+                cur.execute(STATEMENT, (url_id, status_code))
 
     def get_checks_for_site(self, url_id: int) -> list[NamedTuple]:
-        STATEMENT = "SELECT * FROM url_checks WHERE url_id=%s"
+        STATEMENT = "SELECT * FROM url_checks WHERE url_id=%s ORDER BY id DESC"
 
         with self.conn as conn:
             with conn.cursor() as cur:

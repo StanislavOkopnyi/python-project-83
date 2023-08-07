@@ -1,5 +1,6 @@
 import os
 import dotenv
+import requests
 from flask import (
     Flask,
     flash,
@@ -12,6 +13,7 @@ from flask import (
 from validators.url import url as url_validator
 from urllib.parse import urlparse
 from psycopg2.errors import UniqueViolation
+
 
 from .database import DB
 
@@ -82,7 +84,16 @@ def get_url(id):
     )
 
 
-@app.route("/urls/<id>/checks", methods=["POST"])
+@app.post("/urls/<id>/checks")
 def url_check(id):
-    database.create_new_check(id)
+    site_url = database.get_url(id).name
+
+    try:
+        site_req = requests.get(site_url)
+        assert site_req.status_code == 200
+        database.create_new_check(id, site_req.status_code)
+        flash("Страница успешно проверена", "success")
+    except Exception:
+        flash("Произошла ошибка при проверке", "fail")
+
     return redirect(url_for('get_url', id=id))
