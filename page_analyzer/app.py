@@ -55,7 +55,7 @@ def index_post():
         database.insert_values_urls(url)
     except UniqueViolation:
         flash("Страница уже существует", "fail")
-        return index_get(data["url"])
+        return redirect(url_for("get_url", id=database.get_id_from_url(url)))
 
     id = database.get_id_from_url(url)
     flash("Страница успешно добавлена", "success")
