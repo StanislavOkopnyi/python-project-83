@@ -28,9 +28,9 @@ database = DB()
 
 
 @app.get("/")
-def index_get(url: str = ""):
+def index_get(url: str = "", code: int = 200):
     messages = get_flashed_messages(with_categories=True)
-    return render_template("index.html", messages=messages, url=url)
+    return render_template("index.html", messages=messages, url=url), code
 
 
 @app.post("/")
@@ -43,12 +43,12 @@ def index_post():
         url = f"{url_parser.scheme}://{url_parser.netloc}"
     else:
         flash("Некорректный URL", "fail")
-        return index_get(data["url"])
+        return index_get(data["url"], 422)
 
     # URL length check
     if len(url) > 255:
         flash("Некорректный URL", "fail")
-        return index_get(data["url"])
+        return index_get(data["url"], 422)
 
     # Uniqueness of the URL check
     try:
