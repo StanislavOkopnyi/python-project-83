@@ -5,7 +5,7 @@ from requests import Response
 class Parser():
     def __init__(self, response: Response) -> None:
         self.parser = bs4.BeautifulSoup(response.text)
-    
+
     @property
     def h1(self) -> str:
         try:
@@ -24,7 +24,7 @@ class Parser():
     def meta_description(self) -> str:
         try:
             return str(self.parser.find("meta",
-                                    attrs={"name": "description"}
-                                    )["content"])
+                                        attrs={"name": "description"}
+                                        )["content"])
         except AttributeError:
             return ""
