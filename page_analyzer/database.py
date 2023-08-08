@@ -61,7 +61,7 @@ class URLChecksInterface(DataBaseConnection):
     def create_new_check(
             self, url_id: int, status_code: int,
             h1: str = "", title: str = "", description: str = ""
-            ) -> None:
+                ) -> None:
         STATEMENT = ("INSERT INTO url_checks (url_id, status_code, h1, "
                      "title, description) "
                      "VALUES (%s, %s, %s, %s, %s)")
@@ -70,7 +70,7 @@ class URLChecksInterface(DataBaseConnection):
             with conn.cursor() as cur:
                 cur.execute(
                     STATEMENT, (url_id, status_code, h1, title, description)
-                    )
+                        )
 
     def get_checks_for_site(self, url_id: int) -> list[NamedTuple]:
         STATEMENT = "SELECT * FROM url_checks WHERE url_id=%s ORDER BY id DESC"
