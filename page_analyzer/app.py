@@ -28,9 +28,9 @@ database = DB()
 
 
 @app.get("/")
-def index_get():
+def index_get(url: str = ""):
     messages = get_flashed_messages(with_categories=True)
-    return render_template("index.html", messages=messages)
+    return render_template("index.html", messages=messages, url=url)
 
 
 @app.post("/")
@@ -39,25 +39,25 @@ def index_post():
 
     # URL validation
     if url_validator(data["url"]) is True:
-        parsed_url = urlparse(data["url"])
-        data["url"] = f"{parsed_url.scheme}://{parsed_url.netloc}"
+        url_parser = urlparse(data["url"])
+        url = f"{url_parser.scheme}://{url_parser.netloc}"
     else:
         flash("Некорректный URL", "fail")
-        return redirect(url_for('index_get'))
+        return index_get(data["url"])
 
     # URL length check
-    if len(data["url"]) > 255:
+    if len(url) > 255:
         flash("Некорректный URL", "fail")
-        return redirect(url_for('index_get'))
+        return index_get(data["url"])
 
     # Uniqueness of the URL check
     try:
-        database.insert_values_urls(data["url"])
+        database.insert_values_urls(url)
     except UniqueViolation:
         flash("Страница уже существует", "fail")
-        return redirect(url_for('index_get'))
+        return index_get(data["url"])
 
-    id = database.get_id_from_url(data["url"])
+    id = database.get_id_from_url(url)
     flash("Страница успешно добавлена", "success")
     return redirect(url_for('get_url', id=id))
 
