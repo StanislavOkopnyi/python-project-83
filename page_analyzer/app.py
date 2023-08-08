@@ -62,7 +62,7 @@ def index_post():
     return redirect(url_for('get_url', id=id))
 
 
-@app.route("/urls/")
+@app.route("/urls")
 def urls_list():
     sites = database.get_urls_with_checks()[::-1]
     messages = get_flashed_messages(with_categories=True)
