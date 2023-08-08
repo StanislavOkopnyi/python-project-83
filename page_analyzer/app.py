@@ -47,7 +47,7 @@ def index_post():
 
     # URL length check
     if len(data["url"]) > 255:
-        flash("Некорректный URL =(", "fail")
+        flash("Некорректный URL", "fail")
         return redirect(url_for('index_get'))
 
     # Uniqueness of the URL check

@@ -4,7 +4,7 @@ from requests import Response
 
 class Parser():
     def __init__(self, response: Response) -> None:
-        self.parser = bs4.BeautifulSoup(response.text)
+        self.parser = bs4.BeautifulSoup(response.text, "html.parser")
 
     @property
     def h1(self) -> str:
