@@ -42,23 +42,23 @@ def index_post():
         parsed_url = urlparse(data["url"])
         data["url"] = f"{parsed_url.scheme}://{parsed_url.netloc}"
     else:
-        flash("Некорректный URL =(", "fail")
+        flash("Некорректный URL", "fail")
         return redirect(url_for('index_get'))
 
     # URL length check
     if len(data["url"]) > 255:
-        flash("Слишком длинный URL =(", "fail")
+        flash("Некорректный URL =(", "fail")
         return redirect(url_for('index_get'))
 
     # Uniqueness of the URL check
     try:
         database.insert_values_urls(data["url"])
     except UniqueViolation:
-        flash("Данный URL был сохранен ранее", "fail")
+        flash("Страница уже существует", "fail")
         return redirect(url_for('index_get'))
 
     id = database.get_id_from_url(data["url"])
-    flash("URL сохранен =)", "success")
+    flash("Страница успешно добавлена", "success")
     return redirect(url_for('get_url', id=id))
 
 
