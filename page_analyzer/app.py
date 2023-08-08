@@ -33,8 +33,8 @@ def index_get(url: str = "", code: int = 200):
     return render_template("index.html", messages=messages, url=url), code
 
 
-@app.post("/")
-def index_post():
+@app.post("/urls")
+def urls_post():
     data = request.form.to_dict()
 
     # URL validation
