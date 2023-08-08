@@ -14,6 +14,8 @@ from validators.url import url as url_validator
 from urllib.parse import urlparse
 from psycopg2.errors import UniqueViolation
 
+from page_analyzer.parser import Parser
+
 
 from .database import DB
 
@@ -89,9 +91,12 @@ def url_check(id):
     site_url = database.get_url(id).name
 
     try:
-        site_req = requests.get(site_url)
-        assert site_req.status_code == 200
-        database.create_new_check(id, site_req.status_code)
+        site_res = requests.get(site_url)
+        assert site_res.status_code == 200
+        parser = Parser(site_res)
+        database.create_new_check(id, site_res.status_code,
+                                  parser.h1, parser.title,
+                                  parser.meta_description)
         flash("Страница успешно проверена", "success")
     except Exception:
         flash("Произошла ошибка при проверке", "fail")
