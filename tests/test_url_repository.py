@@ -8,8 +8,6 @@ from page_analyzer.repository import URLRepository
 
 @fixture
 def url_repo(mocker):
-    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
-                 lambda x: None)
     repo = URLRepository(PostgresConnection)
     return repo
 
@@ -24,6 +22,8 @@ def record():
 
 
 def test_add(mocker, url_repo):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     mocker.patch("page_analyzer.database.PostgresConnection.execute",
                  lambda x, y: None)
 
@@ -31,6 +31,8 @@ def test_add(mocker, url_repo):
 
 
 def test_get_url(mocker, url_repo, record):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     mocker.patch(
             "page_analyzer.database.PostgresConnection.execute_and_get_item",
             lambda x, y: record)
@@ -39,6 +41,8 @@ def test_get_url(mocker, url_repo, record):
 
 
 def test_get_id_from_url(mocker, url_repo, record):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     mocker.patch(
             "page_analyzer.database.PostgresConnection.execute_and_get_item",
             lambda x, y: record)

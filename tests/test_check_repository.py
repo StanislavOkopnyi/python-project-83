@@ -8,8 +8,6 @@ from page_analyzer.repository import URLChecksRepository
 
 @fixture
 def checks_repo(mocker):
-    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
-                 lambda x: None)
     repo = URLChecksRepository(PostgresConnection)
     return repo
 
@@ -27,6 +25,8 @@ def record():
 
 
 def test_add_check(mocker, checks_repo):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     mocker.patch("page_analyzer.database.PostgresConnection.execute",
                  lambda x, y: None)
 
@@ -36,6 +36,8 @@ def test_add_check(mocker, checks_repo):
 
 
 def test_get_checks(mocker, checks_repo, record):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     mocker.patch(
             "page_analyzer.database.PostgresConnection.execute_and_get_list",
             lambda x, y: [record,])
@@ -44,6 +46,8 @@ def test_get_checks(mocker, checks_repo, record):
 
 
 def test_get_urls_with_checks(mocker, checks_repo, record):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     mocker.patch(
             "page_analyzer.database.PostgresConnection.execute_and_get_list",
             lambda x, y: [record,])
