@@ -34,7 +34,7 @@ class PostgresConnection(AbstractConnection):
         DATABASE_URL = os.getenv('DATABASE_URL')
 
         self._pool = SimpleConnectionPool(
-            10, 20,
+            1, 20,
             DATABASE_URL,
             cursor_factory=NamedTupleCursor
         )
