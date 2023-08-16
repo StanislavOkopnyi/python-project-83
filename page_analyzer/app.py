@@ -91,15 +91,15 @@ def get_url(id):
 def url_check(id):
     site_url = url_repo.get_url(id).name
 
-    # try:
-    site_res = requests.get(site_url)
-    assert site_res.status_code == 200
-    parser = Parser(site_res)
-    checks_repo.add_check(id, site_res.status_code,
-                          parser.h1, parser.title,
-                          parser.meta_description)
-    flash("Страница успешно проверена", "success")
-    # except Exception:
-    #     flash("Произошла ошибка при проверке", "fail")
+    try:
+        site_res = requests.get(site_url)
+        assert site_res.status_code == 200
+        parser = Parser(site_res)
+        checks_repo.add_check(id, site_res.status_code,
+                              parser.h1, parser.title,
+                              parser.meta_description)
+        flash("Страница успешно проверена", "success")
+    except Exception:
+        flash("Произошла ошибка при проверке", "fail")
 
     return redirect(url_for('get_url', id=id))
