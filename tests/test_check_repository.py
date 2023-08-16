@@ -5,6 +5,7 @@ from pytest import fixture
 from page_analyzer.database import PostgresConnection
 from page_analyzer.repository import URLChecksRepository
 
+
 @fixture
 def checks_repo():
     repo = URLChecksRepository(PostgresConnection)
@@ -39,7 +40,7 @@ def test_get_checks(mocker, checks_repo, record):
 
     assert checks_repo.get_checks(1) == [record, ]
 
-    
+
 def test_get_urls_with_checks(mocker, checks_repo, record):
     mocker.patch(
             "page_analyzer.database.PostgresConnection.execute_and_get_list",
