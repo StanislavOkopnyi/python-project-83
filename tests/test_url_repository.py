@@ -7,7 +7,9 @@ from page_analyzer.repository import URLRepository
 
 
 @fixture
-def url_repo():
+def url_repo(mocker):
+    mocker.patch("page_analyzer.database.PostgresConnection.__init__",
+                 lambda x: None)
     repo = URLRepository(PostgresConnection)
     return repo
 
