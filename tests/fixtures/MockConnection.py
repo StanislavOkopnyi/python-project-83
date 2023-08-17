@@ -1,7 +1,4 @@
-from page_analyzer.database import AbstractConnection
-
-
-class MockConnection(AbstractConnection):
+class MockConnection():
 
     def __init__(self) -> None:
         ...
