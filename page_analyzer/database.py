@@ -39,13 +39,6 @@ class PostgresConnection(AbstractConnection):
             cursor_factory=NamedTupleCursor
         )
 
-        with open("database.sql", "r") as doc:
-            query = doc.read()
-
-        with self._pool.getconn() as conn:
-            with conn.cursor() as cur:
-                cur.execute(query)
-
     def execute(self, query) -> None:
         """
         Execute SQL query
