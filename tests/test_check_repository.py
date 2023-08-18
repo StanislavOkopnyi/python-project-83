@@ -27,8 +27,8 @@ record = Record(1, 1, 200, "Foo", "Bar", "FooBar", datetime(2023, 8, 16))
               new=lambda x, y: None)
 def test_add_check(checks_repo):
     assert checks_repo.add_check(
-            1, 200, "Foo", "Bar", "FooBar",
-            ) is None
+        1, 200, "Foo", "Bar", "FooBar",
+    ) is None
 
 
 @patch.object(MockConnection, "execute_and_get_list",

@@ -14,9 +14,9 @@ def url_repo():
 
 
 Record = namedtuple(
-        "Record",
-        ["id", "name", "created_at"]
-        )
+    "Record",
+    ["id", "name", "created_at"]
+)
 record = Record(1, "https://google.com", datetime(2023, 8, 16))
 
 
