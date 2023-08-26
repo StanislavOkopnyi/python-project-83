@@ -1,4 +1,4 @@
-name: flake8 linter
+name: Tests and linter check
 
 on:
   push:
