@@ -49,7 +49,7 @@ class URLChecksRepository(DefaultRepository):
     def get_urls_with_checks(self) -> list[NamedTuple]:
         QUERY = (("SELECT DISTINCT ON (urls.id) urls.id, urls.name, "
                   "url_checks.created_at, url_checks.status_code from "
-                  "urls JOIN url_checks ON url_checks.url_id = urls.id "
+                  "urls LEFT JOIN url_checks ON url_checks.url_id = urls.id "
                   "ORDER BY id, created_at DESC;"), )
         urls_with_checks = self.db_connection.execute_and_get_list(QUERY)
         return urls_with_checks

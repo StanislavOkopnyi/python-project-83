@@ -93,7 +93,7 @@ def url_check(id):
 
     try:
         site_res = requests.get(site_url)
-        assert site_res.status_code == 200
+        assert site_res.status_code in (i for i in range(200, 400))
         parser = Parser(site_res)
         checks_repo.add_check(id, site_res.status_code,
                               parser.h1, parser.title,
