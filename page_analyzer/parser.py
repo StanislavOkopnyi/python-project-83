@@ -10,14 +10,14 @@ class Parser():
     def h1(self) -> str:
         try:
             return str(self.parser.h1.string)
-        except AttributeError:
+        except Exception:
             return ""
 
     @property
     def title(self) -> str:
         try:
             return str(self.parser.title.string)
-        except AttributeError:
+        except Exception:
             return ""
 
     @property
@@ -26,5 +26,5 @@ class Parser():
             return str(self.parser.find("meta",
                                         attrs={"name": "description"}
                                         )["content"])
-        except AttributeError:
+        except Exception:
             return ""
