@@ -23,7 +23,10 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install poetry
-        poetry install
+        make install
 
     - name: Lint
       run: make lint
+
+    - name: Run tests
+      run: make test
