@@ -23,3 +23,8 @@ SECRET_KEY= (секретный ключ)
 5) Запустить  dev-сервер ` make dev `
 
 
+![](https://github.com/StanislavOkopnyi/python-project-83/blob/main/img/index.png)
+  
+![](https://github.com/StanislavOkopnyi/python-project-83/blob/main/img/urls.png)
+   
+![](https://github.com/StanislavOkopnyi/python-project-83/blob/main/img/urls_id.png)
